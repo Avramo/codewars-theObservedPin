@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Find all variations for a set of numbers with a length of 1 to 8 digits. </h1>
+    <a target="_blank" href="https://www.codewars.com/kata/5263c6999e0f40dee200059d/train/javascript">for codewars: The observed PIN</a>
+    <h4>Enter a number using numbers 0-9  </h4>
+    <input type="text" id="in">
+    <button onclick=print()>get pins</button>
+    <div id="res"></div>
+    <script>
+        function print(){
+           let input = document.getElementById("in").value
+           if (input.length > 8) {
+               alert("Too long! Maximum 8 digits! ")
+               window.location.reload()
+               return
+           }
+           if (isNaN(input)) {
+            alert("Not a Number! ")
+            window.location.reload()
+            return
+           }
+           document.getElementById("res").innerText = getPINs(input)
+        }
+        function getPINs(observed) {
+  // TODO: This is your job, detective!
+  let _1 = observed[0]
+  let _2 = observed[1]
+  let _3 = observed[2]
+  let _4 = observed[3]
+  let _5 = observed[4]
+  let _6 = observed[5]
+  let _7 = observed[6]
+  let _8 = observed[7]
+  
+  var adjacents = {
+    "1" : ["1", "2", "4"],
+    "2" : ["1", "2", "3", "5"],
+    "3" : ["2", "3", "6"],
+    "4" : ["1", "4", "5", "7"],
+    "5" : ["2", "4", "5", "6", "8"],
+    "6" : ["3", "5", "6", "9"],
+    "7" : ["4", "7", "8"],
+    "8" : ["5", "7", "8", "9", "0"],
+    "9" : ["6", "8", "9"],
+    "0" : ["0", "8"]
+  }
+  var results = []
+  
+  let firstArr = adjacents[_1]
+  let secondArr = adjacents[_2]
+  let thirdArr = adjacents[_3]
+  let fourthArr = adjacents[_4]
+  let fifthArr = adjacents[_5]
+  let sixthArr = adjacents[_6]
+  let seventhArr = adjacents[_7]
+  let eighthArr = adjacents[_8]
+
+
+  for (a = 0 ; a < firstArr.length; a++){
+    var first = firstArr[a]
+    if (secondArr != undefined) {
+      for (b = 0 ; b < secondArr.length; b++){
+          var second = secondArr[b]
+          if (thirdArr != undefined) {
+            for (c = 0 ; c < thirdArr.length; c++){
+              var third = thirdArr[c]
+                if (fourthArr != undefined) {
+                  for (d = 0 ; d < fourthArr.length; d++){
+                  var fourth = fourthArr[d]
+                    if (fifthArr != undefined) {
+                       for (e = 0 ; d < fifthArr.length; e++){
+                         var fifth = fifthArr[e]
+                         if (sixthArr != undefined) {
+                            for (f = 0 ; d < sixthArr.length; f++){
+                              var sixth = sixthArr[f]
+                                if(seventhArr != undefined){
+                                  for(g = 0 ; g < sixthArr.length; g++){
+                                    var seventh = seventhArr[g]
+                                    if(eighthArr != undefined){
+                                       for(h = 0 ; h < eighthArr.length; h++){
+                                         var eighth = eighthArr[h]
+                                         results.push(first + second + third + fourth + fifth + sixth + seventh + eighth)
+                                       }
+                                    }
+                                    else{ results.push(first + second + third + fourth + fifth + sixth + seventh) }
+                                  }
+                                }
+                                else{ results.push(first + second + third + fourth + fifth + sixth) }
+                            }
+                         }
+                         else { results.push(first + second + third + fourth + fifth ) }
+      
+                       }
+                    }
+                    else { results.push(first + second + third + fourth) }  
+                  }
+                }
+                else { results.push(first + second + third) }
+             }
+           }
+           else { results.push(first + second)  }
+        }
+      } 
+    else { results.push(first)  }  
+  }
+  
+  return results
+  
+}
+    </script>
+</body>
+</html>
